@@ -7,22 +7,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
-@Table(name="products")
+@Table(name="comments")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Product {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(unique = true)
-    private String productName;
-
-    @OneToMany(mappedBy="product")
+    Long id;
+    @ManyToOne
     @JsonIgnore
-    private List<Comment> comments;
+    Product product;
+    @ManyToOne
+    @JsonIgnore
+    User user;
+    @Lob
+    @Column(columnDefinition = "text")
+    String text;
 }

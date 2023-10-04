@@ -1,4 +1,7 @@
 package com.homework2.homework2.services;
+import com.homework2.homework2.converter.ProductMapper;
+import com.homework2.homework2.dto.ProductPutRequestDto;
+import com.homework2.homework2.dto.ProductPutResponseDto;
 import com.homework2.homework2.entities.Product;
 import com.homework2.homework2.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +28,9 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public Product put(Long id) {
-        Product product=productRepository.findById(id).orElse(null);
-        return productRepository.save(product);
+    public ProductPutResponseDto put(ProductPutRequestDto productPutRequestDto) {
+        return ProductMapper.INSTANCE.map
+                (productRepository.save(ProductMapper.INSTANCE.map
+                        (productPutRequestDto)));
     }
 }

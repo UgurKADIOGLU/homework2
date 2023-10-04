@@ -1,5 +1,7 @@
 package com.homework2.homework2.contoller;
 
+import com.homework2.homework2.dto.ProductPutRequestDto;
+import com.homework2.homework2.dto.ProductPutResponseDto;
 import com.homework2.homework2.entities.Product;
 import com.homework2.homework2.entities.User;
 import com.homework2.homework2.services.ProductService;
@@ -30,7 +32,7 @@ public class ProductController {
         productService.deleteById(id);
     }
     @PutMapping("{id}")
-    public Product put(Long id){
-        return productService.put(id);
+    public ProductPutResponseDto put(ProductPutRequestDto productPutRequestDto){
+        return productService.put(productPutRequestDto);
     }
 }
